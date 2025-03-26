@@ -1,0 +1,109 @@
+body {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+  }
+  
+  .container {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+  }
+  
+  h2 {
+    color: #2d3436;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: 500;
+    color: #636e72;
+  }
+  
+  input[type='text'],
+  input[type='password'] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  input[type='text']:focus,
+  input[type='password']:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 8px rgba(108, 92, 231, 0.2);
+  }
+  
+  button {
+    background-color: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #a29bfe;
+  }
+  
+  a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #6c5ce7;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .text-danger {
+    
+    font-size: 12px;
+  }
+  
+  .alert-danger {
+    background-color: #fab1a0;
+   
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .btn-outline-secondary {
+    background-color: transparent;
+    border: 1px solid #6c5ce7;
+    color: #6c5ce7;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #6c5ce7;
+    color: white;
+  }
+  
