@@ -3,10 +3,10 @@
 
 {% block content %}
 <div class="d-flex justify-content-center align-items-center" 
-     style="min-height: 100vh; background: url('https://imageio.forbes.com/specials-images/imageserve/63986034dfa1b6bcd37ab5e1/0x0.jpg?format=jpg&width=1200') no-repeat center center; background-size: cover;">
+     style="min-height: 100vh; background: url('https://plus.unsplash.com/premium_photo-1677187301535-b46cec7b2cc8?q=80&w=2123&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center; background-size: cover;">
     
-    <div class="col-sm-4 p-4 bg-white rounded shadow">
-        <h2 class="text-muted text-center">Login 📖</h2>
+    <div class="col-sm-4 p-4  rounded shadow">
+        <h2 class="text-black-bold text-center">Login 📖</h2>
 
         {% if form.non_field_errors %}
         <small class="text-danger d-block text-center">
@@ -18,16 +18,18 @@
             {% csrf_token %}
 
             <div class="form-group">
-                <label for="{{ form.username.id_for_label }}">Username:</label>
-                <input type="text" name="{{ form.username.name }}" class="form-control"
-                       value="{{ form.username.value }}" aria-label="Username" />
-                <span class="text-danger">{{ form.username.errors }}</span>
+                <label for="{{ form.username.id_for_label }}" class="text-black">Username :</label>
+                <input type="text" name="{{ form.username.name }}" class="form-control text-black"
+                value="{{ form.username.value|default_if_none:'' }}" aria-label="Username"
+                placeholder="Enter Your Username" required />
+                <span class="text-danger text-black">{{ form.username.errors }}</span>
             </div>
 
             <div class="form-group">
-                <label for="{{ form.password.id_for_label }}">Password 🔐:</label>
+                <label for="{{ form.password.id_for_label }}" class="text-black" >Password 🔐:</label>
                 <input type="password" name="{{ form.password.name }}" class="form-control"
-                       value="{{ form.password.value }}" aria-label="Password" />
+                       value="{{ form.password.value }}" aria-label="Password" 
+                        placeholder="Enter Your Password" required />
                 <span class="text-danger">{{ form.password.errors }}</span>
             </div>
 
