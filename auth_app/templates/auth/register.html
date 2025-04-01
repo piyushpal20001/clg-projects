@@ -1,44 +1,82 @@
-{% extends 'layouts/app.html' %}
-
-{%  block content %}
-
-
-<div class="row justify-content-center">
-    <div class="col-sm-6">
-        <h2 class ="text-muted"> Register🗏</h2>
-        <form method="POST" action ="{% url 'register' %}">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="{{ form.username.id_for_label}}">Username👤:</label>
-            <input type="Username" name="{{ form.username.name}}" class="form-control" value="{{form.username.value}}" />
-            <span class="text-danger">{{ form.username.errors }}</span>
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.gmail.id_for_label}}">G-mail📧:</label>
-            <input type="gmail" name="{{ form.gmail.name}}" class="form-control" value="{{form.gmail.value}}" />
-            <span class="text-danger">{{ form.gmail.errors }}</span>
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.password1.id_for_label}}">Password🔒:</label>
-            <input type="Password" name="{{ form.password1.name}}" class="form-control" value="{{form.password1.value}}" />
-            <span class="text-danger">{{ form.password1.errors }}</span>
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.password2.id_for_label}}">Re-Type Password🔐:</label>
-            <input type="Password" name="{{ form.password2.name}}" class="form-control" value="{{form.password1.value}}" />
-            <span class="text-danger">{{ form.password2.errors }}</span>
-        </div>
+{% extends 'layouts/app.html' %} {% load static %}  {% block content %}
+<div class="d-flex justify-content-center align-items-center" 
+     style="min-height: 100vh; background: url('https://plus.unsplash.com/premium_photo-1677187301535-b46cec7b2cc8?q=80&w=2123&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center; background-size: cover;">
+    <div class="col-sm-4 p-4 rounded shadow">
+        <h2 class="text-black-bold text-center">Register 📖</h2>
         
-        <button type="submit" class="btn btn-dark">Submit</button>
-
-        <a href="{% url 'login' %}"class="btn btn-default">Login with us</a>
-
-
+        {% if form.non_field_errors %}
+        <small class="text-danger d-block text-center">
+            {{ form.non_field_errors.as_ul }}
+        </small>
+        {% endif %}
+        
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}" class="text-black">Username :</label>
+                <input 
+                    type="text" 
+                    name="{{ form.username.name }}" 
+                    class="form-control text-black" 
+                    value="{{ form.username.value|default_if_none:'' }}" 
+                    aria-label="Username" 
+                    placeholder="Enter Your Username" 
+                    required 
+                />
+                <span class="text-danger text-black">{{ form.username.errors }}</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.gmail.id_for_label }}" class="text-black">Gmail :</label>
+                <input 
+                    type="email" 
+                    name="{{ form.gmail.name }}" 
+                    class="form-control text-black" 
+                    value="{{ form.gmail.value|default_if_none:'' }}" 
+                    aria-label="Gmail" 
+                    placeholder="your.email@gmail.com" 
+                    required 
+                />
+                <span class="text-danger text-black">{{ form.gmail.errors }}</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}" class="text-black">Password 🔐:</label>
+                <input 
+                    type="password" 
+                    name="{{ form.password1.name }}" 
+                    class="form-control" 
+                    value="{{ form.password1.value }}" 
+                    aria-label="Password" 
+                    placeholder="Create Password" 
+                    required 
+                />
+                <span class="text-danger">{{ form.password1.errors }}</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}" class="text-black">Confirm Password 🔐:</label>
+                <input 
+                    type="password" 
+                    name="{{ form.password2.name }}" 
+                    class="form-control" 
+                    value="{{ form.password2.value }}" 
+                    aria-label="Confirm Password" 
+                    placeholder="Confirm Password" 
+                    required 
+                />
+                <span class="text-danger">{{ form.password2.errors }}</span>
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-dark">Register ✔</button>
+            </div>
+            
+            <div class="text-center mt-3">
+                <a href="{% url 'login' %}" class="btn btn-secondary">Already Have an Account</a>
+            </div>
         </form>
     </div>
 </div>
-
 {% endblock %}
