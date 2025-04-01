@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import login, logout
+from django.http import HttpResponse
 # Create your views here.
 
 def register_view(request):
@@ -37,4 +38,8 @@ def logout_view(request):
 def forgetpassword_view(request):
     forgetpassword(request) # type: ignore
     return redirect('forget')
+
+
+def home(request):
+    return HttpResponse("<h1>Welcome to My Django Website</h1>")
 
