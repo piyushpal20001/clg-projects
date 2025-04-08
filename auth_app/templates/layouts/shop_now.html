@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}Shop Now - All Books{% endblock %}
+    {% block head %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .filters, .book-list {
+            margin-bottom: 30px;
+        }
+        .book-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            display: flex;
+            gap: 15px;
+        }
+        .book-card img {
+            width: 100px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+    {% endblock %}
+
+</head>
+<body>
+    {% block content %}
+
+<h1>📚 Shop Now</h1>
+
+<form method="GET" class="filters">
+    <input type="text" name="q" placeholder="Search by book name..." value="{{ request.GET.q }}">
+    
+    <select name="category">
+        <option value="all">All Categories</option>
+        {% for code, name in categories %}
+            <option value="{{ code }}" {% if request.GET.category == code %}selected{% endif %}>{{ name }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="text" name="author" placeholder="Author name" value="{{ request.GET.author }}">
+    <input type="number" name="min_price" placeholder="Min Price" value="{{ request.GET.min_price }}">
+    <input type="number" name="max_price" placeholder="Max Price" value="{{ request.GET.max_price }}">
+    
+    <button type="submit">🔍 Filter</button>
+</form>
+
+<div class="book-list">
+    {% for book in books %}
+        <div class="book-card">
+            {% if book.image %}
+                <img src="{{ book.image.url }}" alt="{{ book.name }}">
+            {% else %}
+                <img src="https://via.placeholder.com/100x140?text=No+Image" alt="No Image">
+            {% endif %}
+            <div>
+                <h3>{{ book.name }}</h3>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Category:</strong> {{ book.get_category_display }}</p>
+                <p><strong>Price:</strong> ₹{{ book.buy_price }}</p>
+                <p>{{ book.description|truncatewords:20 }}</p>
+                <button>🛒 Buy Now</button>
+            </div>
+        </div>
+    {% empty %}
+        <p>No books found matching your filters.</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>

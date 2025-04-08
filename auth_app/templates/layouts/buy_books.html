@@ -1,0 +1,32 @@
+<!-- templates/buy_books.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy Books</title>
+    <link rel="stylesheet" href="{% static 'css/buy.css' %}">
+</head>
+<body>
+    <h1>Buy Books</h1>
+    <form method="get">
+        <input type="text" name="q" placeholder="Search books..." value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="book-container">
+        {% for book in books %}
+        <div class="book-card">
+            <img src="{{ book.image.url }}" alt="{{ book.title }}">
+            <h3>{{ book.title }}</h3>
+            <p>Author: {{ book.author }}</p>
+            <p>Price: ${{ book.price }}</p>
+            <button onclick="addToCart('{{ book.id }}')">Add to Cart</button>
+        </div>
+        {% empty %}
+        <p>No books found.</p>
+        {% endfor %}
+    </div>
+
+    <script src="{% static 'js/buy.js' %}"></script>
+</body>
+</html>

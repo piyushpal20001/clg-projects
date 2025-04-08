@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rent a Book</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Container to center content and provide spacing */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Title Styling */
+        .title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        /* Grid layout for book cards */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        /* Individual book card styling */
+        .book-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Image styling inside book card */
+        .book-card img {
+            max-width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        /* Book title styling */
+        .book-card h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        /* Book description and text styling */
+        .book-card p {
+            font-size: 1em;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        /* Price text styling */
+        .book-card .price {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #222;
+        }
+
+        /* Rent Now button styling */
+        .rent-btn {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button hover state */
+        .rent-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="title">Rent a Book</h1>
+    <div class="books-grid">
+        <div class="book-card">
+            <img src="{{ pppp.jpg }}" alt="{{ lallan top }}">
+            <h2>{{ lallan top }}</h2>
+            <p>{{ bhavik kar rha he error solve }}</p>
+            <p class="price">Rent Price: ₹{{ 10 }}</p>
+            <button class="rent-btn" onclick="rentBook('{{ 1 }}')">Rent Now</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- CSRF Token Setup -->
+<input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+
+<script>
+function rentBook(bookId) {
+    let csrftoken = document.getElementById("csrf_token").value;
+
+    fetch(`/auth/rent-book-post/${bookId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrftoken,
+            'Content-Type': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(data => alert(data.message || data.error))
+    .catch(error => console.error('Error:', error));
+}
+</script>
+
+</body>
+</html>
