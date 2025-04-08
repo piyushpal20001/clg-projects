@@ -21,5 +21,5 @@ class Book(models.Model):
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='fiction')
 
     def __str__(self):
-        return self.name
+        return self.name   
    
