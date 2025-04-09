@@ -4,7 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <title>Buy Books</title>
-    <link rel="stylesheet" href="{% static 'css/buy.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+        form button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        .book-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .book-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+        .book-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .book-card h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+        .book-card p {
+            color: #666;
+            margin: 5px 0;
+        }
+        .book-card button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .book-card button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <h1>Buy Books</h1>
@@ -27,6 +106,13 @@
         {% endfor %}
     </div>
 
-    <script src="{% static 'js/buy.js' %}"></script>
+    <script>
+        function addToCart(bookId) {
+            // Basic cart functionality
+            alert('Book added to cart: ' + bookId);
+            // You would typically use AJAX here to add the book to the cart
+            // without reloading the page
+        }
+    </script>
 </body>
 </html>

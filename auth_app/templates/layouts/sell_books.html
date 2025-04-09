@@ -4,47 +4,270 @@
     <meta charset="UTF-8">
     <title>Sell Books</title>
     <style>
-        body { font-family: Arial; padding: 20px; background: #f9f9f9; }
-        form, .book-list, .filter { background: white; padding: 20px; margin: 20px auto; width: 500px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        input, textarea, button { width: 100%; margin: 10px 0; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-        img { max-width: 100px; }
-        .book-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
+        /* Base styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            margin: 0;
+            background: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #6a11cb;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        /* Card styles */
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Form styles */
+        form {
+            display: grid;
+            grid-gap: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 5px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        input:focus, textarea:focus {
+            border-color: #6a11cb;
+            outline: none;
+            box-shadow: 0 0 5px rgba(106, 17, 203, 0.3);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Book list styles */
+        .book-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .book-item:last-child {
+            border-bottom: none;
+        }
+        
+        .book-image {
+            width: 120px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .book-info h3 {
+            margin-top: 0;
+            color: #444;
+        }
+        
+        .book-author {
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .book-price {
+            font-weight: 700;
+            color: #6a11cb;
+            font-size: 1.2rem;
+            margin: 8px 0;
+        }
+        
+        .book-description {
+            color: #555;
+            margin-top: 8px;
+        }
+        
+        /* Filter styles */
+        .filter-section {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+        }
+        
+        .filter-section input {
+            flex: 1;
+        }
+        
+        .filter-section button {
+            flex: 0 0 auto;
+        }
+        
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .book-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .book-image {
+                margin: 0 auto 15px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Sell Your Book</h1>
+    <header>
+        <div class="container">
+            <h1>Sell Your Books</h1>
+            <p>Share your beloved stories with others who will appreciate them</p>
+        </div>
+    </header>
     
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="text" name="title" placeholder="Book Title" required>
-        <input type="text" name="author" placeholder="Author" required>
-        <input type="number" step="0.01" name="price" placeholder="Price" required>
-        <textarea name="description" placeholder="Description"></textarea>
-        <input type="file" name="image">
-        <button type="submit">Add Book</button>
-    </form>
-
-    <div class="filter">
-        <h3>Filter by Minimum Price</h3>
-        <input type="number" id="minPriceInput" placeholder="Enter minimum price">
-        <button onclick="filterByPrice()">Filter</button>
-    </div>
-
-    <div class="book-list">
-        <h2>Books for Sale</h2>
-        {% for book in books %}
-            <div class="book-item">
-                <strong>{{ book.title }}</strong> by {{ book.author }} — ${{ book.price }}<br>
-                <p>{{ book.description }}</p>
-                {% if book.image %}
-                    <img src="{{ book.image.url }}" alt="{{ book.title }}">
-                {% endif %}
+    <div class="container">
+        <div class="card">
+            <h2>Add a New Book</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Book Title</label>
+                    <input type="text" id="title" name="title" placeholder="Enter the book title" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author" placeholder="Enter the author's name" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price ($)</label>
+                    <input type="number" id="price" step="0.01" name="price" placeholder="Enter the price" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Tell potential buyers about the book's condition, edition, etc."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">Book Cover Image</label>
+                    <input type="file" id="image" name="image">
+                </div>
+                <button type="submit">List Book for Sale</button>
+            </form>
+        </div>
+        
+        <div class="card">
+            <h2>Filter Books</h2>
+            <div class="filter-section">
+                <div class="form-group">
+                    <label for="minPriceInput">Minimum Price ($)</label>
+                    <input type="number" id="minPriceInput" placeholder="Enter minimum price">
+                </div>
+                <button onclick="filterByPrice()">Apply Filter</button>
             </div>
-        {% empty %}
-            <p>No books available.</p>
-        {% endfor %}
+        </div>
+        
+        <div class="card">
+            <h2>Books Available for Sale</h2>
+            {% for book in books %}
+                <div class="book-item">
+                    {% if book.image %}
+                        <img src="{{ book.image.url }}" alt="{{ book.title }}" class="book-image">
+                    {% else %}
+                        <div class="book-image" style="background-color: #eee; display: flex; align-items: center; justify-content: center;">
+                            <span style="color: #999;">No Image</span>
+                        </div>
+                    {% endif %}
+                    <div class="book-info">
+                        <h3>{{ book.title }}</h3>
+                        <div class="book-author">by {{ book.author }}</div>
+                        <div class="book-price">${{ book.price }}</div>
+                        <p class="book-description">{{ book.description }}</p>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="empty-state">
+                    <p>No books available for sale yet. Be the first to list one!</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-
+    
     <script>
         function filterByPrice() {
             const minPrice = document.getElementById("minPriceInput").value;

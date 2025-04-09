@@ -6,89 +6,152 @@
     <style>
         /* General Body Styling */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
             margin: 0;
             padding: 0;
             color: #333;
+            line-height: 1.6;
         }
-
+        
         /* Container to center content and provide spacing */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
         }
-
+        
         /* Title Styling */
         .title {
             text-align: center;
             margin-bottom: 40px;
-            font-size: 2.5em;
-            color: #333;
+            font-size: 2.8em;
+            color: #2c3e50;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
         }
-
+        
+        .title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+        
         /* Grid layout for book cards */
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
-
+        
         /* Individual book card styling */
         .book-card {
             background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            position: relative;
         }
-
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+        
+        /* Image container */
+        .book-image {
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        
         /* Image styling inside book card */
         .book-card img {
             max-width: 100%;
             height: auto;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 15px;
+            display: block;
+            transition: transform 0.5s ease;
         }
-
+        
+        .book-card:hover img {
+            transform: scale(1.05);
+        }
+        
         /* Book title styling */
         .book-card h2 {
             font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #444;
+            margin-bottom: 12px;
+            color: #2c3e50;
+            font-weight: 600;
         }
-
+        
         /* Book description and text styling */
         .book-card p {
             font-size: 1em;
-            margin-bottom: 10px;
-            color: #666;
+            margin-bottom: 12px;
+            color: #7f8c8d;
+            line-height: 1.5;
         }
-
+        
         /* Price text styling */
         .book-card .price {
             font-weight: bold;
-            margin-bottom: 15px;
-            color: #222;
+            margin: 15px 0;
+            color: #2c3e50;
+            font-size: 1.2em;
+            background-color: #f1f8ff;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
         }
-
+        
         /* Rent Now button styling */
         .rent-btn {
-            background-color: #28a745;
+            background: linear-gradient(45deg, #3498db, #9b59b6);
             color: #fff;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 1em;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 80%;
+            margin-top: 10px;
         }
-
+        
         /* Button hover state */
         .rent-btn:hover {
-            background-color: #218838;
+            background: linear-gradient(45deg, #2980b9, #8e44ad);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .title {
+                font-size: 2.2em;
+            }
+            .books-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 20px;
+            }
         }
     </style>
 </head>
@@ -98,15 +161,37 @@
     <h1 class="title">Rent a Book</h1>
     <div class="books-grid">
         <div class="book-card">
-            <img src="{{ pppp.jpg }}" alt="{{ lallan top }}">
-            <h2>{{ lallan top }}</h2>
-            <p>{{ bhavik kar rha he error solve }}</p>
+            <div class="book-image">
+                <img src="/api/placeholder/230/350" alt="{{ lallan top }}">
+            </div>
+            <h2>{{ thikk }}</h2>
+            <p>{{ hyyyy }}</p>
             <p class="price">Rent Price: ₹{{ 10 }}</p>
             <button class="rent-btn" onclick="rentBook('{{ 1 }}')">Rent Now</button>
         </div>
+        
+        <!-- Additional sample books for preview -->
+        <div class="book-card">
+            <div class="book-image">
+                <img src="/api/placeholder/230/350" alt="Sample Book">
+            </div>
+            <h2>Pride and Prejudice</h2>
+            <p>Jane Austen's masterpiece of literature with unforgettable characters.</p>
+            <p class="price">Rent Price: ₹15</p>
+            <button class="rent-btn" onclick="rentBook('2')">Rent Now</button>
+        </div>
+        
+        <div class="book-card">
+            <div class="book-image">
+                <img src="/api/placeholder/230/350" alt="Sample Book">
+            </div>
+            <h2>The Great Gatsby</h2>
+            <p>F. Scott Fitzgerald's classic tale of ambition and love in the Jazz Age.</p>
+            <p class="price">Rent Price: ₹12</p>
+            <button class="rent-btn" onclick="rentBook('3')">Rent Now</button>
+        </div>
     </div>
 </div>
-
 
 <!-- CSRF Token Setup -->
 <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
@@ -114,7 +199,7 @@
 <script>
 function rentBook(bookId) {
     let csrftoken = document.getElementById("csrf_token").value;
-
+    
     fetch(`/auth/rent-book-post/${bookId}/`, {
         method: 'POST',
         headers: {
@@ -123,8 +208,52 @@ function rentBook(bookId) {
         },
     })
     .then(response => response.json())
-    .then(data => alert(data.message || data.error))
-    .catch(error => console.error('Error:', error));
+    .then(data => {
+        if(data.message) {
+            showNotification(data.message, 'success');
+        } else if(data.error) {
+            showNotification(data.error, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('Something went wrong. Please try again.', 'error');
+    });
+}
+
+// Add a notification system
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = message;
+    
+    // Style the notification
+    notification.style.position = 'fixed';
+    notification.style.bottom = '20px';
+    notification.style.right = '20px';
+    notification.style.padding = '15px 25px';
+    notification.style.borderRadius = '5px';
+    notification.style.color = '#fff';
+    notification.style.fontSize = '1rem';
+    notification.style.zIndex = '1000';
+    notification.style.boxShadow = '0 4px 8px rgba(0,0,0,0.12)';
+    
+    if (type === 'success') {
+        notification.style.backgroundColor = '#28a745';
+    } else if (type === 'error') {
+        notification.style.backgroundColor = '#dc3545';
+    }
+    
+    document.body.appendChild(notification);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 500);
+    }, 3000);
 }
 </script>
 
